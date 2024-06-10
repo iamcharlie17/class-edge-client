@@ -1,8 +1,12 @@
-import { Link, NavLink } from "react-router-dom";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+// import { FaRegCircleUser } from "react-icons/fa6";
 import logo from "../assets/logo/logo.png";
+import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const DownNav = () => {
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
   const navItems = (
     <>
       <li>
@@ -20,11 +24,21 @@ const DownNav = () => {
           Teach On ClassEdge
         </NavLink>
       </li>
-      <li>
-        <NavLink className={"uppercase"} to={"/profile"}>
-          <FaRegCircleUser size={30} />
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <button
+            onClick={() => {
+              logOut()
+                .then(() => {
+                  toast.success("Logout success");
+                  navigate("/");
+                })
+            }}
+          >
+            LogOut
+          </button>
+        </li>
+      )}
     </>
   );
 
