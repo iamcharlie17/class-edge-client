@@ -1,8 +1,24 @@
-# React + Vite
+# ClassEdge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Admin Credentials
+- **Email**: admin@gmail.com
+- **Password**: adminadmin
 
-Currently, two official plugins are available:
+## Live Site
+- [ClassEdge Live Site](https://edumanage.example.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+1. Responsive design for mobile, tablet, and desktop.
+2. Secure authentication with JWT.
+3. Dynamic homepage with banners, partners, popular classes, and statistics.
+4. Detailed class pages with enrollment and payment integration.
+5. Comprehensive dashboards for students, teachers, and admins.
+6. CRUD operations with custom notifications.
+7. Teacher application and approval workflow.
+8. Class and user management by admin.
+9. Feedback and rating system.
+10. Search functionality and pagination.
+
+## Links
+- [Client-side Repository](https://github.com/programming-hero-web-course1/b9a12-client-side-iamcharlie17)
+- [Server-side Repository](https://github.com/programming-hero-web-course1/b9a12-server-side-iamcharlie17)
