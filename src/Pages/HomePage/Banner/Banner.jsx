@@ -15,8 +15,8 @@ const Banner = () => {
         }}
       >
         <div className="space-y-4">
-          <h1 className="md:text-6xl text-white font-semibold">ClassEdge</h1>
-          <h1 className="md:text-6xl text-white font-semibold">
+          <h1 className=" text-3xl md:text-6xl text-white font-semibold">ClassEdge</h1>
+          <h1 className=" text-3xl md:text-6xl text-white font-semibold">
             Learning Courses
           </h1>
           <div className="flex justify-center">
@@ -49,8 +49,8 @@ const Banner = () => {
         }}
       >
         <div className="space-y-4">
-          <h1 className="md:text-6xl text-white font-semibold">ClassEdge</h1>
-          <h1 className="md:text-6xl text-white font-semibold">
+          <h1 className=" text-3xl md:text-6xl text-white font-semibold">ClassEdge</h1>
+          <h1 className=" text-3xl md:text-6xl text-white font-semibold">
             Learning Courses
           </h1>
           <div className="flex justify-center">
@@ -83,8 +83,8 @@ const Banner = () => {
         }}
       >
         <div className="space-y-4">
-          <h1 className="md:text-6xl text-white font-semibold">ClassEdge</h1>
-          <h1 className="md:text-6xl text-white font-semibold">
+          <h1 className=" text-3xl md:text-6xl text-white font-semibold">ClassEdge</h1>
+          <h1 className=" text-3xl md:text-6xl text-white font-semibold">
             Learning Courses
           </h1>
           <div className="flex justify-center">
@@ -117,8 +117,8 @@ const Banner = () => {
         }}
       >
         <div className="space-y-4">
-          <h1 className="md:text-6xl text-white font-semibold">ClassEdge</h1>
-          <h1 className="md:text-6xl text-white font-semibold">
+          <h1 className=" text-3xl md:text-6xl text-white font-semibold">ClassEdge</h1>
+          <h1 className=" text-3xl md:text-6xl text-white font-semibold">
             Learning Courses
           </h1>
           <div className="flex justify-center">

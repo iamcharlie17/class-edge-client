@@ -1,12 +1,14 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-// import { FaRegCircleUser } from "react-icons/fa6";
+import { FaRegCircleUser } from "react-icons/fa6";
 import logo from "../assets/logo/logo.png";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useRole from "../Hooks/useRole";
 
 const DownNav = () => {
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
+  const [role] = useRole();
   const navItems = (
     <>
       <li>
@@ -24,26 +26,11 @@ const DownNav = () => {
           Teach On ClassEdge
         </NavLink>
       </li>
-      {user && (
-        <li>
-          <button
-            onClick={() => {
-              logOut()
-                .then(() => {
-                  toast.success("Logout success");
-                  navigate("/");
-                })
-            }}
-          >
-            LogOut
-          </button>
-        </li>
-      )}
     </>
   );
 
   return (
-    <div className="navbar bg-white px-2 md:px-24">
+    <div className="navbar bg-white px-2 md:px-16 lg:px-24">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -64,7 +51,7 @@ const DownNav = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content items-center mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content bg-[#49c3af] mt-3 z-[1] shadow-lg text-white  p-4 rounded-box w-72 "
           >
             {navItems}
           </ul>
@@ -76,8 +63,68 @@ const DownNav = () => {
           </Link>
         </div>
       </div>
-      <div className="navbar-end hidden lg:flex">
+      <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal items-center px-1">{navItems}</ul>
+      </div>
+      <div className="navbar-end">
+        {user && (
+          <>
+            <div className="dropdown dropdown-bottom dropdown-end">
+              <div tabIndex={0} role="button">
+                <FaRegCircleUser size={30} />
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu shadow-xl space-y-4 p-8 text-white font-semibold rounded-box bg-[#49c3af] w-72"
+              >
+                <li>
+                  <p className="uppercase shadow-lg">
+                    {user?.displayName} - {role}
+                  </p>
+                </li>
+                <li>
+                  {role === "student" && (
+                    <NavLink
+                      className={"uppercase shadow-lg"}
+                      to={`/dashboard/student`}
+                    >
+                      Dashboard
+                    </NavLink>
+                  )}
+                  {role === "teacher" && (
+                    <NavLink
+                      className={"uppercase shadow-lg"}
+                      to={`/dashboard/teacher`}
+                    >
+                      Dashboard
+                    </NavLink>
+                  )}
+                  {role === "admin" && (
+                    <NavLink
+                      className={"uppercase shadow-lg"}
+                      to={`/dashboard/admin`}
+                    >
+                      Dashboard
+                    </NavLink>
+                  )}
+                </li>
+                <li>
+                  <button
+                    className=" shadow-lg"
+                    onClick={() => {
+                      logOut().then(() => {
+                        toast.success("Logout success");
+                        navigate("/");
+                      });
+                    }}
+                  >
+                    LOGOUT
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

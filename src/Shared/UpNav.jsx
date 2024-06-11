@@ -10,7 +10,7 @@ import { CiInstagram } from "react-icons/ci";
 
 const UpNav = () => {
   return (
-    <div className=" min-h-12 px-2 py-2 md:px-24 flex flex-col gap-4 md:gap-0 md:flex-row items-center justify-between bg-[#49c3af]">
+    <div className=" min-h-12 px-2 py-2 md:px-16 lg:px-24 flex flex-col gap-4 md:gap-0 md:flex-row items-center justify-between bg-[#49c3af]">
       <div className=" text-white uppercase flex items-center text-sm gap-2 ">
         <CiShare2 size={20} />
         <p>Our social</p>
