@@ -6,11 +6,14 @@ import { uploadImage } from "../../utils/uploadImage";
 import toast from "react-hot-toast";
 import useRole from "../../Hooks/useRole";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
-const UpdateProfileModal = ({ isOpen, setIsOpen, user }) => {
+const UpdateProfileModal = ({ isOpen, setIsOpen, user, phoneNumber }) => {
   const { updateUser, loading, setLoading } = useAuth();
   const [role] = useRole();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   //   console.log(user)
 
@@ -22,16 +25,25 @@ const UpdateProfileModal = ({ isOpen, setIsOpen, user }) => {
     return result;
   };
 
+  const { mutateAsync } = useMutation({
+    mutationFn: async (data) => {
+      const { res } = await axiosSecure.put(
+        `/update-user/${user?.email}`,
+        data
+      );
+      return res;
+    },
+  });
+
   useEffect(() => {
     setValue("name", user?.displayName);
-    setValue("phoneNumber", user?.phoneNumber);
-  }, [setValue, user?.displayName, user?.phoneNumber]);
+    setValue("phoneNumber", phoneNumber);
+  }, [setValue, user?.displayName, phoneNumber]);
 
   const onSubmit = async (data) => {
     // console.log(data);
     if (data.photo.length > 0) {
       const image = await imgbb(data.photo[0]);
-
       updateUser(data.name, image, data.phoneNumber)
         .then(() => {
           toast.success("Profile updated successfully");
@@ -53,6 +65,8 @@ const UpdateProfileModal = ({ isOpen, setIsOpen, user }) => {
           setLoading(false);
         });
     }
+
+    await mutateAsync({ name: data?.name, phoneNumber: data?.phoneNumber });
   };
   return (
     <Dialog

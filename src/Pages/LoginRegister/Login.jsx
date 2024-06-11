@@ -1,4 +1,3 @@
-
 import authImg from "../../assets/images/auth/authImg.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -6,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { axiosCommon } from "../../Hooks/useAxiosCommon";
 import useAuth from "../../Hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
 
 const Login = () => {
   const { loginUser, loading, setLoading, googleLogin } = useAuth();
@@ -19,24 +19,28 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const { mutateAsync } = useMutation({
+    mutationFn: async (data) => {
+      const { res } = await axiosCommon.post("/users", data);
+      return res;
+    },
+    onSuccess: () => {
+      toast.success("Login success");
+      navigate(location?.state ? `${location?.state}` : "/");
+    },
+  });
+
   const onSubmit = (data) => {
     const { email, password } = data;
     setLoading(true);
     loginUser(email, password)
-      .then((result) => {
-        axiosCommon
-          .post("/users", {
-            name: result?.user?.displayName,
-            email,
-            role: "student",
-            phoneNumber: result?.user?.phoneNumber
-          })
-          .then(() => {
-            // console.log(res.data);
-            toast.success("Login success");
-            navigate(location?.state ? `${location?.state}` : "/");
-            // setLoading(false);
-          });
+      .then(async (result) => {
+        await mutateAsync({
+          name: result?.user?.displayName,
+          email,
+          role: "student",
+          phoneNumber: result?.user?.phoneNumber,
+        });
       })
       .catch((err) => {
         toast(`${err.message}`);
@@ -46,19 +50,13 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((result) => {
-        axiosCommon
-          .post("/users", {
-            name: result?.user?.displayName,
-            email: result?.user?.email,
-            role: "student",
-            phoneNumber: result?.user?.phoneNumber
-          })
-          .then((res) => {
-            console.log(res.data);
-            toast.success("Sign In success");
-            navigate(location?.state ? `${location?.state}` : "/");
-          });
+      .then(async (result) => {
+        await mutateAsync({
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+          role: "student",
+          phoneNumber: result?.user?.phoneNumber,
+        });
       })
       .catch((err) => {
         toast.error(`${err.message}`);

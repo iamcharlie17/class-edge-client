@@ -22,7 +22,8 @@ const useRole = () => {
     //  console.log(roleInfo)
 
   const role = roleInfo[0]?.role;
-  return [role, isLoading, refetch];
+  const phoneNumber = roleInfo[0]?.phoneNumber
+  return [role, isLoading, refetch, phoneNumber];
 };
 
 export default useRole;

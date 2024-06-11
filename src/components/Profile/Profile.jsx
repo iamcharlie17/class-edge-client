@@ -2,9 +2,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import UpdateProfileModal from "../Modal/UpdateProfileModal";
+import useRole from "../../Hooks/useRole";
 
 const Profile = ({ user, role, logOut }) => {
-
+  const [,,,phoneNumber] = useRole()
+  // console.log(phoneNumber)
   let [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate();
 
@@ -33,6 +35,7 @@ const Profile = ({ user, role, logOut }) => {
           </h2>
         </div>
         <p className="text-gray-100">Email: {user?.email}</p>
+        <p className="text-gray-100">Phone Number: {phoneNumber}</p>
         <div className="flex gap-4 py-4">
           <button
             onClick={() => setIsOpen(true)}
@@ -47,7 +50,7 @@ const Profile = ({ user, role, logOut }) => {
             Logout
           </button>
         </div>
-        <UpdateProfileModal isOpen={isOpen} setIsOpen={setIsOpen} user={user}/>
+        <UpdateProfileModal isOpen={isOpen} setIsOpen={setIsOpen} phoneNumber={phoneNumber} user={user}/>
       </div>
     </div>
   );

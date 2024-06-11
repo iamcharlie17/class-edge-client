@@ -1,8 +1,11 @@
+import { Helmet } from "react-helmet-async";
+import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 
 const AllUsers = () => {
     return (
         <div>
-            <h1>all users are comming soon...</h1>
+            <Helmet><title>ClassEdge | All Users</title></Helmet>
+           <SectionTitle heading={'All Users'} subHeading={'------------------'}/>
         </div>
     );
 };

@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
@@ -7,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { uploadImage } from "../../utils/uploadImage";
 import { axiosCommon } from "../../Hooks/useAxiosCommon";
 import authImg from "../../assets/images/auth/authImg.png";
+import { useMutation } from "@tanstack/react-query";
 
 const Register = () => {
   const { createUser, logOut, updateUser, setLoading, loading, googleLogin } =
@@ -25,6 +25,20 @@ const Register = () => {
     return result;
   };
 
+  const { mutateAsync } = useMutation({
+    mutationFn: async (data) => {
+      const { res } = axiosCommon.post("/users", data);
+      return res;
+    },
+    onSuccess: () => {
+      toast.success("User created successfully");
+      // console.log(image, "inside");
+      logOut();
+      navigate("/login");
+      setLoading(false);
+    },
+  });
+
   const onSubmit = async (data) => {
     // setLoading(true)
     // await imgbb(data.photo[0]);
@@ -38,18 +52,8 @@ const Register = () => {
       .then(() => {
         setLoading(true);
         updateUser(name, image, phoneNumber)
-          .then(() => {
-            axiosCommon
-              .post("/users", { name, email, role: "student", phoneNumber })
-              .then((res) => {
-                if (res.data.insertedId) {
-                  toast.success("User created successfully");
-                  // console.log(image, "inside");
-                  logOut();
-                  navigate("/login");
-                  setLoading(false);
-                }
-              });
+          .then(async () => {
+            await mutateAsync({ name, email, role: "student", phoneNumber });
           })
           .catch((err) => {
             toast.error(`${err.message}`);
@@ -64,19 +68,13 @@ const Register = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((result) => {
-        axiosCommon
-          .post("/users", {
-            name: result?.user?.displayName,
-            email: result?.user?.email,
-            role: "student",
-            phoneNumber: result?.user?.phoneNumber
-          })
-          .then((res) => {
-            console.log(res.data);
-            toast.success("Sign In success");
-            navigate(location?.state ? `${location?.state}` : "/");
-          });
+      .then(async (result) => {
+        await mutateAsync({
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+          role: "student",
+          phoneNumber: result?.user?.phoneNumber,
+        });
       })
       .catch((err) => {
         toast.error(`${err.message}`);
