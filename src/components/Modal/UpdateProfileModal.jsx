@@ -65,7 +65,6 @@ const UpdateProfileModal = ({ isOpen, setIsOpen, user, phoneNumber }) => {
           setLoading(false);
         });
     }
-
     await mutateAsync({ name: data?.name, phoneNumber: data?.phoneNumber });
   };
   return (
@@ -75,7 +74,7 @@ const UpdateProfileModal = ({ isOpen, setIsOpen, user, phoneNumber }) => {
       className="relative z-50 "
     >
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-        <DialogPanel className="max-w-lg bg-gray-200 space-y-4 border  p-12">
+        <DialogPanel className="max-w-lg bg-gray-200 space-y-4 border rounded-sm  p-12">
           <DialogTitle className="font-bold text-center text-xl border-b border-black py-2">
             Update Profile
           </DialogTitle>
