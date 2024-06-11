@@ -33,14 +33,14 @@ const Register = () => {
     const image = await imgbb(data.photo[0]);
     // console.log(image, "outside");
 
-    const { name, email, password } = data;
+    const { name, email, password, phoneNumber } = data;
     await createUser(email, password)
       .then(() => {
         setLoading(true);
-        updateUser(name, image)
+        updateUser(name, image, phoneNumber)
           .then(() => {
             axiosCommon
-              .post("/users", { name, email, role: "student" })
+              .post("/users", { name, email, role: "student", phoneNumber })
               .then((res) => {
                 if (res.data.insertedId) {
                   toast.success("User created successfully");
@@ -70,6 +70,7 @@ const Register = () => {
             name: result?.user?.displayName,
             email: result?.user?.email,
             role: "student",
+            phoneNumber: result?.user?.phoneNumber
           })
           .then((res) => {
             console.log(res.data);
@@ -144,6 +145,20 @@ const Register = () => {
                     {...register("email", { required: true })}
                   />
                   {errors.email && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                </div>
+                <div>
+                  <label htmlFor="phoneNumber">Phone Number</label>
+                  <br />
+                  <input
+                    className="w-full px-4 py-2 rounded-l"
+                    type="text"
+                    name="phoneNumber"
+                    placeholder="Enter your phone number"
+                    {...register("phoneNumber", { required: true })}
+                  />
+                  {errors.phoneNumber && (
                     <span className="text-red-500">This field is required</span>
                   )}
                 </div>

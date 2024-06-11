@@ -29,6 +29,7 @@ const Login = () => {
             name: result?.user?.displayName,
             email,
             role: "student",
+            phoneNumber: result?.user?.phoneNumber
           })
           .then(() => {
             // console.log(res.data);
@@ -51,6 +52,7 @@ const Login = () => {
             name: result?.user?.displayName,
             email: result?.user?.email,
             role: "student",
+            phoneNumber: result?.user?.phoneNumber
           })
           .then((res) => {
             console.log(res.data);
