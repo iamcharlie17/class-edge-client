@@ -17,7 +17,7 @@ const DownNav = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className={"uppercase"} to={"/all-classes"}>
+        <NavLink className={"uppercase"} to={"/classes"}>
           All Classes
         </NavLink>
       </li>

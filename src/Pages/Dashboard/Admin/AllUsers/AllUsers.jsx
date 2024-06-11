@@ -43,7 +43,7 @@ const AllUsers = () => {
       <SectionTitle heading={"All Users"} subHeading={"------------------"} />
       <div>
         <h1 className="lg:text-3xl md:text-xl p-8 font-semibold uppercase">
-          total users: 100
+          total users: {usersWithoutAdmin?.length}
         </h1>
       </div>
 

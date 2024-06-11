@@ -46,12 +46,12 @@ const UpdateRoleModal = ({ isOpen, setIsOpen, user, refetch }) => {
               <option value="teacher">Teacher</option>
               <option value="admin">Admin</option>
             </select>
-            <div className="text-center my-4">
+            <div className="text-center my-8">
               <button className="bg-[#4AC2AE] text-white w-1/2 text-center py-2 uppercase">Update</button>
             </div>
           </form>
           <div className="flex justify-end">
-            <button className="px-4 mt-8 py-2 bg-red-500 text-white rounded-full" onClick={() => setIsOpen(false)}>x</button>
+            <button className="px-4 mt-8 py-2 m-2 bg-red-500 text-white rounded-full" onClick={() => setIsOpen(false)}>x</button>
           </div>
         </DialogPanel>
       </div>

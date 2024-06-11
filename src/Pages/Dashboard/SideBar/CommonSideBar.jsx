@@ -11,7 +11,7 @@ const CommonSideBar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/all-classes"}>
+        <NavLink to={"/classes"}>
           <ImBooks size={25} /> ClASSES
         </NavLink>
       </li>
