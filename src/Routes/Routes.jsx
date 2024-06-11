@@ -10,6 +10,9 @@ import MyEnrollClass from "../Pages/Dashboard/Student/MyEnrollClass/MyEnrollClas
 import AdminProfile from "../Pages/Dashboard/Admin/AdminProfile/AdminProfile";
 import TeacherRequest from "../Pages/Dashboard/Admin/TeacherRequest/TeacherRequest";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers/AllUsers";
+import TeacherProfile from "../Pages/Dashboard/Teacher/TeacherProfile/TeacherProfile";
+import AddClass from "../Pages/Dashboard/Teacher/TeacherProfile/AddClass/AddClass";
+import MyClass from "../Pages/Dashboard/Teacher/MyClass/MyClass";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +58,19 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/all-classes',
         element: <AllClasses/>
+      },
+      //teacher
+      {
+        path: '/dashboard/teacher',
+        element: <TeacherProfile/>
+      },
+      {
+        path: '/dashboard/add-class',
+        element: <AddClass/>
+      },
+      {
+        path: '/dashboard/my-classes',
+        element: <MyClass/>
       }
     ],
   },

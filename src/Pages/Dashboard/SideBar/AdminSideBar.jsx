@@ -1,6 +1,7 @@
 import { ImBooks } from "react-icons/im";
 import { NavLink } from "react-router-dom";
-import { FaBook, FaChalkboardTeacher, FaUsers } from "react-icons/fa";
+import { FaChalkboardTeacher, FaUsers } from "react-icons/fa";
+import { FaRegCircleUser } from "react-icons/fa6";
 
 const AdminSideBar = () => {
   return (
@@ -8,7 +9,7 @@ const AdminSideBar = () => {
       <div className="mb-12">
         <li>
           <NavLink to={"/dashboard/admin"}>
-            <FaBook size={25} /> PROFILE
+            <FaRegCircleUser size={25} /> PROFILE
           </NavLink>
         </li>
         <li>
