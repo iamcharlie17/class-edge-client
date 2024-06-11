@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { axiosCommon } from "../../../../../Hooks/useAxiosCommon";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../../../../components/Loading/Loading";
 
 const AddClass = () => {
   const { user, setLoading, loading } = useAuth();
@@ -57,6 +58,8 @@ const AddClass = () => {
       setLoading(false)
     }
   };
+
+  if(loading) return <Loading/>
 
   return (
     <div>

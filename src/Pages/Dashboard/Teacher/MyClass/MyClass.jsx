@@ -64,14 +64,14 @@ const MyClass = () => {
         {classes.map((c) => (
           <div key={c._id}>
             <div
-              className="h-64 bg-cover"
+              className="h-64 md:h-80 lg:h-72 bg-cover"
               style={{
                 backgroundImage: `url(${c.image})`,
               }}
             ></div>
-            <div className="flex justify-between p-2 bg-slate-100">
+            <div className=" p-4 bg-slate-100">
               <div>
-                <h1 className="text-xl">{c.title}</h1>
+                <h1 className="text-xl font-bold">{c.title}</h1>
                 <div>
                   <h2>
                     <span className="font-semibold">Name:</span> {c.name}
@@ -86,20 +86,25 @@ const MyClass = () => {
                   <p className="pr-12">
                     <small>{c.description.slice(0, 60)}......</small>
                   </p>
+                  <h2 className="text-yellow-500 font-semibold">
+                    <span className="text-black">Status: </span>
+                    {c.status}
+                  </h2>
                 </div>
               </div>
-              <div className="flex flex-col gap-2 items-center w-1/3">
-                <h2 className="text-yellow-500 font-semibold">{c.status}</h2>
-                <button className="p-2 bg-[#49c3af] text-white rounded-sm">
-                  <FaEdit size={25} />
-                </button>
-                <button
-                  onClick={() => handleDelete(c._id)}
-                  className="p-2 bg-red-500 text-white rounded-sm"
-                >
-                  <MdDelete size={25} />
-                </button>
-                <button className="py-2 px-4 bg-white border border-[#49c3af] rounded-sm">
+              <div className="flex justify-between items-center my-2">
+                <div className="flex gap-4">
+                  <button className="p-2 bg-[#49c3af] text-white rounded-sm">
+                    <FaEdit size={25} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(c._id)}
+                    className="p-2 bg-red-500 text-white rounded-sm"
+                  >
+                    <MdDelete size={25} />
+                  </button>
+                </div>
+                <button disabled={c.status !== 'approved'} className="py-2 px-4 bg-white border border-[#49c3af] rounded-sm">
                   <small>See Details</small>
                 </button>
               </div>
