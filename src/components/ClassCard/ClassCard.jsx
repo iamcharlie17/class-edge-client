@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ClassCard = ({ clas }) => {
   return (
     <div>
@@ -25,9 +27,11 @@ const ClassCard = ({ clas }) => {
             <h1 className="text-xl font-bold">Price: ${clas.price}</h1>
           </div>
           <div className="text-center">
-            <button className="w-1/2  uppercase font-bold text-white bg-[#4AC2AE] mt-8 py-2">
-              Enroll
-            </button>
+            <Link to={`/class/${clas._id}`}>
+              <button className="w-1/2  uppercase font-bold text-white bg-[#4AC2AE] mt-8 py-2">
+                Enroll
+              </button>
+            </Link>
           </div>
         </div>
       </div>

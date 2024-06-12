@@ -14,6 +14,7 @@ import AddClass from "../Pages/Dashboard/Teacher/TeacherProfile/AddClass/AddClas
 import MyClass from "../Pages/Dashboard/Teacher/MyClass/MyClass";
 import AllClasses from "../Pages/Dashboard/Admin/AllClasses/AllClasses";
 import Classes from "../Pages/Classes/Classes";
+import ClassDetails from "../components/ClassDetails/ClassDetails";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
         path: "/classes",
         element: <Classes/>
       },
+      {
+        path: '/class/:id',
+        element: <ClassDetails/>
+      }
     ],
   },
   {
