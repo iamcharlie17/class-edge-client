@@ -7,11 +7,13 @@ import { uploadImage } from "../../utils/uploadImage";
 import { axiosCommon } from "../../Hooks/useAxiosCommon";
 import authImg from "../../assets/images/auth/authImg.png";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 
 const Register = () => {
   const { createUser, logOut, updateUser, setLoading, loading, googleLogin } =
     useAuth();
   const navigate = useNavigate();
+  const [toggle, setToggle] = useState(false)
 
   const {
     register,
@@ -162,28 +164,30 @@ const Register = () => {
                     <span className="text-red-500">This field is required</span>
                   )}
                 </div>
-                <div>
+                <div className="relative">
                   <label htmlFor="password">Password</label>
                   <br />
                   <input
                     className="w-full px-4 py-2 rounded-l"
-                    type="password"
+                    type={`${!toggle?'password':'text'}`}
                     placeholder="Enter your password"
                     name="password"
                     {...register("password", {
                       required: "Password is required",
-                      pattern: {
-                        value: /^.{8,}$/,
-                        message: "Password must be atleast 8 charaters",
-                      },
                     })}
                   />
-                  {errors.password && (
-                    <span className="text-red-500">
-                      {errors.password.message}
-                    </span>
-                  )}
+                  <h1
+                    onClick={() => setToggle(!toggle)}
+                    className="absolute cursor-pointer top-1/2 right-4"
+                  >
+                    {!toggle ? "Show" : "Hide"}
+                  </h1>
                 </div>
+                {errors.password && (
+                  <span className="text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
                 <div>
                   <button
                     disabled={loading}

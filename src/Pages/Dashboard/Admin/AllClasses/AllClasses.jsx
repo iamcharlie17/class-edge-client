@@ -94,7 +94,7 @@ const AllClasses = () => {
                   </button>
                 </th>
                 <th>
-                  <button className="px-2 py-1 bg-[#4BC1AD] text-white rounded-sm">
+                  <button disabled={c.status !== 'approved'} className={`px-2 py-1 ${c.status !== 'approved'? 'bg-[#374d49]':'bg-[#4BC1AD]'} text-white rounded-sm`}>
                     <small>See Progress</small>
                   </button>
                 </th>

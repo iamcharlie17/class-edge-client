@@ -6,10 +6,12 @@ import { Helmet } from "react-helmet-async";
 import { axiosCommon } from "../../Hooks/useAxiosCommon";
 import useAuth from "../../Hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 
 const Login = () => {
   const { loginUser, loading, setLoading, googleLogin } = useAuth();
   const navigate = useNavigate();
+  const [toggle, setToggle] = useState(false);
 
   const location = useLocation();
 
@@ -97,24 +99,30 @@ const Login = () => {
                     <span className="text-red-500">This field is required</span>
                   )}
                 </div>
-                <div>
+                <div className="relative">
                   <label htmlFor="password">Password</label>
                   <br />
                   <input
                     className="w-full px-4 py-2 rounded-l"
-                    type="password"
+                    type={`${!toggle?'password':'text'}`}
                     placeholder="Enter your password"
                     name="password"
                     {...register("password", {
                       required: "Password is required",
                     })}
                   />
-                  {errors.password && (
-                    <span className="text-red-500">
-                      {errors.password.message}
-                    </span>
-                  )}
+                  <h1
+                    onClick={() => setToggle(!toggle)}
+                    className="absolute cursor-pointer top-1/2 right-4"
+                  >
+                    {!toggle ? "Show" : "Hide"}
+                  </h1>
                 </div>
+                {errors.password && (
+                  <span className="text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
 
                 <div>
                   <button
