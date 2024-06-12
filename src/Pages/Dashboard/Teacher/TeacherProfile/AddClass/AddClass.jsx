@@ -49,6 +49,7 @@ const AddClass = () => {
       status: "pending",
       description: data.description,
       category: data.category,
+      enroll: 0,
     };
     try {
       setLoading(true);

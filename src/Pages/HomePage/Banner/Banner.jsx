@@ -24,7 +24,7 @@ const Banner = () => {
               <button className="py-2 px-8 border border-white hover:scale-105 transition-transform text-white rounded-sm">
                 About Us
               </button>
-              <Link to={"/all-classes"}>
+              <Link to={"/classes"}>
                 <button className="py-2 px-8 hover:scale-105 transition-transform text-white bg-[#49c3af]">
                   Classes
                 </button>

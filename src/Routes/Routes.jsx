@@ -12,8 +12,8 @@ import AllUsers from "../Pages/Dashboard/Admin/AllUsers/AllUsers";
 import TeacherProfile from "../Pages/Dashboard/Teacher/TeacherProfile/TeacherProfile";
 import AddClass from "../Pages/Dashboard/Teacher/TeacherProfile/AddClass/AddClass";
 import MyClass from "../Pages/Dashboard/Teacher/MyClass/MyClass";
-import Classes from "../Pages/AllClasses/Classes";
 import AllClasses from "../Pages/Dashboard/Admin/AllClasses/AllClasses";
+import Classes from "../Pages/Classes/Classes";
 
 export const router = createBrowserRouter([
   {

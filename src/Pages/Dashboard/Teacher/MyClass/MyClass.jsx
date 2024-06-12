@@ -3,8 +3,6 @@ import useAuth from "../../../../Hooks/useAuth";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import { axiosCommon } from "../../../../Hooks/useAxiosCommon";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
@@ -92,16 +90,16 @@ const MyClass = () => {
                   </h2>
                 </div>
               </div>
-              <div className="flex justify-between items-center my-2">
+              <div className="flex flex-wrap justify-between items-center my-2">
                 <div className="flex gap-4">
-                  <button className="p-2 bg-[#49c3af] text-white rounded-sm">
-                    <FaEdit size={25} />
+                  <button className="px-4 py-2 bg-[#49c3af] text-white rounded-sm">
+                   Update
                   </button>
                   <button
                     onClick={() => handleDelete(c._id)}
-                    className="p-2 bg-red-500 text-white rounded-sm"
+                    className="py-2 px-4 bg-red-500 text-white rounded-sm"
                   >
-                    <MdDelete size={25} />
+                    Delete
                   </button>
                 </div>
                 <button disabled={c.status !== 'approved'} className="py-2 px-4 bg-white border border-[#49c3af] rounded-sm">
