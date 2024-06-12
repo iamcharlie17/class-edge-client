@@ -23,15 +23,15 @@ const TeachOnClassEdge = () => {
   const { data = [] } = useQuery({
     queryKey: ["exist-teacher"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/teachers`)
+      const { data } = await axiosSecure.get(`/teachers`);
       return data;
     },
   });
 
-//   console.log(data);
-  const teacherInfo = data?.filter(d => d.email === user?.email) || []
-  const teacher = teacherInfo[0] || {}
-  const status = teacher?.status || ''
+  //   console.log(data);
+  const teacherInfo = data?.filter((d) => d.email === user?.email) || [];
+  const teacher = teacherInfo[0] || {};
+  const status = teacher?.status || "";
 
   const imgbb = async (image) => {
     setLoading(true);
@@ -59,7 +59,17 @@ const TeachOnClassEdge = () => {
   useEffect(() => {
     setValue("name", user?.displayName);
     setValue("email", user?.email);
-  }, [setValue, user?.displayName, user?.email]);
+    setValue("title", teacher?.title);
+    setValue("experience", teacher?.experience);
+    setValue("category", teacher?.category);
+  }, [
+    setValue,
+    user?.displayName,
+    user?.email,
+    teacher.title,
+    teacher?.experience,
+    teacher?.category,
+  ]);
 
   const onSubmit = async (data) => {
     // console.log(data.photo[0]);
@@ -92,7 +102,7 @@ const TeachOnClassEdge = () => {
     }
   };
 
-  if(isPending || loading) return <Loading/>
+  if (isPending || loading) return <Loading />;
   return (
     <div className="min-h-[calc(100vh-240px)]">
       <Helmet>
@@ -201,8 +211,13 @@ const TeachOnClassEdge = () => {
             )}
           </div>
           <div className="text-center col-span-2 my-4">
-            <button disabled={status === 'pending'} className="w-1/2 bg-[#4AC2AE] text-white font-semibold py-2 rounded-sm">
-              {status === 'rejected'? "Request To Another": "Submit For Review"}
+            <button
+              disabled={status === "pending"}
+              className="w-1/2 bg-[#4AC2AE] text-white font-semibold py-2 rounded-sm"
+            >
+              {status === "rejected"
+                ? "Request To Another"
+                : "Submit For Review"}
             </button>
           </div>
         </form>

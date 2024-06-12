@@ -16,6 +16,7 @@ import AllClasses from "../Pages/Dashboard/Admin/AllClasses/AllClasses";
 import Classes from "../Pages/Classes/Classes";
 import ClassDetails from "../components/ClassDetails/ClassDetails";
 import TeachOnClassEdge from "../Pages/TeachOnClassEdge/TeachOnClassEdge";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/teach-on-classedge',
-        element: <TeachOnClassEdge/>
+        element: <PrivateRoute><TeachOnClassEdge/></PrivateRoute>
       }
     ],
   },
