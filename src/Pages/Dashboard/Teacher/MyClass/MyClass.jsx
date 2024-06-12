@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosCommon } from "../../../../Hooks/useAxiosCommon";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import Loading from "../../../../components/Loading/Loading";
 
 const MyClass = () => {
   const { user, loading } = useAuth();
@@ -47,7 +48,7 @@ const MyClass = () => {
 
   refetch();
 
-  if (loading || isLoading) return <h1 className="text-black">Loading</h1>;
+  if (loading || isLoading) return <Loading/>
 
   return (
     <div>

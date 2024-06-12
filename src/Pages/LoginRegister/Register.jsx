@@ -48,22 +48,24 @@ const Register = () => {
     // console.log(image, "outside");
 
     const { name, email, password, phoneNumber } = data;
-    await createUser(email, password)
-      .then(() => {
-        setLoading(true);
-        updateUser(name, image, phoneNumber)
-          .then(async () => {
-            await mutateAsync({ name, email, role: "student", phoneNumber });
-          })
-          .catch((err) => {
-            toast.error(`${err.message}`);
-            setLoading(false);
-          });
-      })
-      .catch((err) => {
-        toast.error(`${err.message}`);
-        setLoading(false);
-      });
+    if (image) {
+      await createUser(email, password)
+        .then(() => {
+          setLoading(true);
+          updateUser(name, image, phoneNumber)
+            .then(async () => {
+              await mutateAsync({ name, email, role: "student", phoneNumber });
+            })
+            .catch((err) => {
+              toast.error(`${err.message}`);
+              setLoading(false);
+            });
+        })
+        .catch((err) => {
+          toast.error(`${err.message}`);
+          setLoading(false);
+        });
+    }
   };
 
   const handleGoogleLogin = () => {

@@ -21,11 +21,22 @@ const DownNav = () => {
           All Classes
         </NavLink>
       </li>
-      <li>
-        <NavLink className={"uppercase"} to={"/teach-on-classedge"}>
-          Teach On ClassEdge
-        </NavLink>
-      </li>
+      {role === "teacher"  ? (
+        <li>
+          <button
+            className={"uppercase"}
+            onClick={() => toast.success("You are already a Teacher")}
+          >
+            Teach On ClassEdge
+          </button>
+        </li>
+      ) : (
+        <li>
+          <NavLink className={"uppercase"} to={"/teach-on-classedge"}>
+            Teach On ClassEdge
+          </NavLink>
+        </li>
+      )}
     </>
   );
 

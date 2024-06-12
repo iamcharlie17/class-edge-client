@@ -44,15 +44,17 @@ const UpdateProfileModal = ({ isOpen, setIsOpen, user, phoneNumber }) => {
     // console.log(data);
     if (data.photo.length > 0) {
       const image = await imgbb(data.photo[0]);
-      updateUser(data.name, image, data.phoneNumber)
-        .then(() => {
-          toast.success("Profile updated successfully");
-          setLoading(false);
-        })
-        .catch((err) => {
-          toast.error(`${err.message}`);
-          setLoading(false);
-        });
+      {
+        updateUser(data.name, image, data.phoneNumber)
+          .then(() => {
+            toast.success("Profile updated successfully");
+            setLoading(false);
+          })
+          .catch((err) => {
+            toast.error(`${err.message}`);
+            setLoading(false);
+          });
+      }
     } else {
       updateUser(data.name, user?.photoURL, data.phoneNumber)
         .then(() => {

@@ -15,6 +15,7 @@ import MyClass from "../Pages/Dashboard/Teacher/MyClass/MyClass";
 import AllClasses from "../Pages/Dashboard/Admin/AllClasses/AllClasses";
 import Classes from "../Pages/Classes/Classes";
 import ClassDetails from "../components/ClassDetails/ClassDetails";
+import TeachOnClassEdge from "../Pages/TeachOnClassEdge/TeachOnClassEdge";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: '/class/:id',
         element: <ClassDetails/>
+      },
+      {
+        path: '/teach-on-classedge',
+        element: <TeachOnClassEdge/>
       }
     ],
   },
