@@ -20,6 +20,7 @@ import PrivateRoute from "./PrivateRoute";
 import AllTeachers from "../Pages/AllTeachers/AllTeachers";
 import MyClassDetails from "../Pages/Dashboard/Teacher/MyClassDetails/MyClassDetails";
 import UpdateMyClass from "../Pages/Dashboard/Teacher/UpdateMyClass/UpdateMyClass";
+import AssigmentPage from "../Pages/Dashboard/Student/MyEnrollClass/AssigmentPage";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/my-enroll-class",
         element: <MyEnrollClass />,
+      },
+      {
+        path: '/dashboard/my-enroll-class/:id',
+        element: <PrivateRoute><AssigmentPage/></PrivateRoute>
       },
       //admin
       {

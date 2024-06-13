@@ -15,7 +15,7 @@ const MyEnrollClass = () => {
     },
   });
 
-  console.log(classes);
+//   console.log(classes);
 
   if (loading || isLoading) return <Loading />;
 
