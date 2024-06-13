@@ -50,17 +50,19 @@ const AddClass = () => {
       description: data.description,
       category: data.category,
       enroll: 0,
+      submissions: 0,
+      assignments: 0,
     };
     try {
       setLoading(true);
       await mutateAsync(classInfo);
     } catch (error) {
       toast.success(`${error.message}`);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
-  if(loading) return <Loading/>
+  if (loading) return <Loading />;
 
   return (
     <div>
@@ -146,7 +148,7 @@ const AddClass = () => {
             name=""
             id=""
             cols="30"
-            rows="10"
+            rows="8"
             {...register("description", { required: true })}
           ></textarea>
           {errors.description && (
@@ -154,7 +156,10 @@ const AddClass = () => {
           )}
         </div>
         <div className="text-center col-span-2">
-          <button disabled={loading} className="py-2 px-8 bg-[#49c3af] text-white w-1/2 rounded-sm font-semibold">
+          <button
+            disabled={loading}
+            className="py-2 px-8 bg-[#49c3af] text-white w-1/2 rounded-sm font-semibold"
+          >
             {loading ? "Wait..." : "Add Class"}
           </button>
         </div>

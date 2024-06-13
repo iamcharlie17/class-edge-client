@@ -16,12 +16,12 @@ const Teachers = () => {
 
   //get 6 teachers only
   const teachers = data.slice(0, 6) || [];
-  console.log(teachers);
+  // console.log(teachers);
 
   if (isLoading) return <Loading />;
   return (
     <div>
-      <SectionTitle heading={"Meet Experts"} subHeading={"The Best Teachers"} />
+      <SectionTitle heading={"Meet Our Experts"} subHeading={"The Best Teachers"} />
       <div className="grid lg:grid-cols-3 mx-auto gap-4 md:gap-8 my-8">
         {teachers.map((teacher) => (
           <TeacherCard teacher={teacher} key={teacher._id} />

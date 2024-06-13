@@ -12,7 +12,7 @@ const Classes = () => {
             return data;
         }
     })
-    console.log(classes)
+    // console.log(classes)
     return (
         <div className="min-h-[calc(100vh-240px)]">
             <Helmet><title>ClassEdge | Classes</title></Helmet>

@@ -18,6 +18,8 @@ import ClassDetails from "../components/ClassDetails/ClassDetails";
 import TeachOnClassEdge from "../Pages/TeachOnClassEdge/TeachOnClassEdge";
 import PrivateRoute from "./PrivateRoute";
 import AllTeachers from "../Pages/AllTeachers/AllTeachers";
+import MyClassDetails from "../Pages/Dashboard/Teacher/MyClassDetails/MyClassDetails";
+import UpdateMyClass from "../Pages/Dashboard/Teacher/UpdateMyClass/UpdateMyClass";
 
 export const router = createBrowserRouter([
   {
@@ -30,20 +32,28 @@ export const router = createBrowserRouter([
       },
       {
         path: "/classes",
-        element: <Classes/>
+        element: <Classes />,
       },
       {
-        path: '/class/:id',
-        element: <ClassDetails/>
+        path: "/class/:id",
+        element: <ClassDetails />,
       },
       {
-        path: '/teach-on-classedge',
-        element: <PrivateRoute><TeachOnClassEdge/></PrivateRoute>
+        path: "/teach-on-classedge",
+        element: (
+          <PrivateRoute>
+            <TeachOnClassEdge />
+          </PrivateRoute>
+        ),
       },
       {
-        path: '/all-teachers',
-        element: <PrivateRoute><AllTeachers/></PrivateRoute>
-      }
+        path: "/all-teachers",
+        element: (
+          <PrivateRoute>
+            <AllTeachers />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -73,22 +83,30 @@ export const router = createBrowserRouter([
         element: <AllUsers />,
       },
       {
-        path: '/dashboard/all-classes',
-        element: <AllClasses/>
+        path: "/dashboard/all-classes",
+        element: <AllClasses />,
       },
       //teacher
       {
-        path: '/dashboard/teacher',
-        element: <TeacherProfile/>
+        path: "/dashboard/teacher",
+        element: <TeacherProfile />,
       },
       {
-        path: '/dashboard/add-class',
-        element: <AddClass/>
+        path: "/dashboard/add-class",
+        element: <AddClass />,
       },
       {
-        path: '/dashboard/my-classes',
-        element: <MyClass/>
-      }
+        path: "/dashboard/update-class/:id",
+        element: <UpdateMyClass />,
+      },
+      {
+        path: "/dashboard/my-classes",
+        element: <MyClass />,
+      },
+      {
+        path: "/dashboard/my-class-details/:id",
+        element: <MyClassDetails />,
+      },
     ],
   },
   {

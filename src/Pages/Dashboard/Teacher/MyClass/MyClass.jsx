@@ -6,6 +6,7 @@ import { axiosCommon } from "../../../../Hooks/useAxiosCommon";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import Loading from "../../../../components/Loading/Loading";
+import { Link } from "react-router-dom";
 
 const MyClass = () => {
   const { user, loading } = useAuth();
@@ -48,7 +49,7 @@ const MyClass = () => {
 
   refetch();
 
-  if (loading || isLoading) return <Loading/>
+  if (loading || isLoading) return <Loading />;
 
   return (
     <div>
@@ -93,9 +94,11 @@ const MyClass = () => {
               </div>
               <div className="flex flex-wrap justify-between items-center my-2">
                 <div className="flex gap-4">
-                  <button className="px-4 py-2 bg-[#49c3af] text-white rounded-sm">
-                   Update
-                  </button>
+                  <Link to={`/dashboard/update-class/${c._id}`}>
+                    <button className="px-4 py-2 bg-[#49c3af] text-white rounded-sm">
+                      Update
+                    </button>
+                  </Link>
                   <button
                     onClick={() => handleDelete(c._id)}
                     className="py-2 px-4 bg-red-500 text-white rounded-sm"
@@ -103,9 +106,16 @@ const MyClass = () => {
                     Delete
                   </button>
                 </div>
-                <button disabled={c.status !== 'approved'} className="py-2 px-4 bg-white border border-[#49c3af] rounded-sm">
-                  <small>See Details</small>
-                </button>
+                <Link to={`/dashboard/my-class-details/${c._id}`}>
+                  <button
+                    disabled={c.status !== "approved"}
+                    className={`py-2 px-4 bg-white border ${
+                      c.status !== "approved" && "bg-gray-400"
+                    } border-[#49c3af] rounded-sm`}
+                  >
+                    <small>See Details</small>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
