@@ -7,7 +7,7 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { MdOutlinePayment } from "react-icons/md";
 
 const Stats = () => {
-  const [classes, setClasses] = useState([]);
+  const [clas, setClasses] = useState([]);
   useEffect(() => {
     axiosCommon.get("/all-classes").then((res) => setClasses(res.data));
   }, []);
@@ -19,6 +19,8 @@ const Stats = () => {
       return res.data;
     },
   });
+
+  const classes = clas.filter((c) => c.status === "approved");
 
   const totalEnroll = classes.reduce(
     (totalEnroll, clas) => totalEnroll + parseInt(clas.enroll),
@@ -32,7 +34,7 @@ const Stats = () => {
         subHeading={"This Platform's Quality"}
       />
       <div className="p-12 bg-[#4AC2AE] rounded-sm">
-        <div className="stats shadow-lg my-8 w-full text-center py-12 ">
+        <div className="stats shadow-lg my-8 stats-vertical lg:stats-horizontal w-full text-center py-12 ">
           <div className="stat">
             <div className="stat-title">Total Users</div>
             <div className="stat-value">{users?.length}</div>

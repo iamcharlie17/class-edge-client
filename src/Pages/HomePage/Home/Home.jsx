@@ -7,6 +7,7 @@ import Teachers from "../TeacherPanel/Teachers";
 import Stats from "../Stats/Stats";
 import TeacherRequest from "../TeacherRequest/TeacherRequest";
 import FeedBacks from "../FeedBacks/FeedBacks";
+import RecommendationClass from "../RecommendationClass/RecommendationClass";
 
 const Home = () => {
   return (
@@ -14,8 +15,9 @@ const Home = () => {
       <Helmet><title>ClassEdge | Home</title></Helmet>
       <Banner />
       <div className="mx-2 md:mx-16 lg:mx-24">
-        <FeedBacks/>
+        <RecommendationClass/>
         <Stats/>
+        <FeedBacks/>
         <Sponsor/>
         <Categories />
         <Teachers/>

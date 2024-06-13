@@ -1,5 +1,4 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaRegCircleUser } from "react-icons/fa6";
 import logo from "../assets/logo/logo.png";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
@@ -82,7 +81,7 @@ const DownNav = () => {
           <>
             <div className="dropdown dropdown-bottom dropdown-end">
               <div tabIndex={0} role="button">
-                <FaRegCircleUser size={30} />
+                <img src={user?.photoURL} className="h-10 w-10 md:h-12 md:w-12 border-2 border-[#4AC2AE] rounded-full object-cover object-center" alt="" />
               </div>
               <ul
                 tabIndex={0}

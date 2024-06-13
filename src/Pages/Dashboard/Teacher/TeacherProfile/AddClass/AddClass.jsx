@@ -4,14 +4,14 @@ import useAuth from "../../../../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { uploadImage } from "../../../../../utils/uploadImage";
 import { useMutation } from "@tanstack/react-query";
-import { axiosCommon } from "../../../../../Hooks/useAxiosCommon";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../../../../components/Loading/Loading";
+import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 
 const AddClass = () => {
-  const { user, setLoading, loading } = useAuth();
+  const { user, setLoading } = useAuth();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const {
     register,
@@ -25,9 +25,9 @@ const AddClass = () => {
     return result;
   };
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: async (classData) => {
-      const { data } = await axiosCommon.post("/add-class", classData);
+      const { data } = await axiosSecure.post("/add-class", classData);
       return data;
     },
     onSuccess: () => {
@@ -57,12 +57,12 @@ const AddClass = () => {
       setLoading(true);
       await mutateAsync(classInfo);
     } catch (error) {
-      toast.success(`${error.message}`);
+      toast.error(`${error.message}`);
       setLoading(false);
     }
   };
 
-  if (loading) return <Loading />;
+  // if (loading) return <Loading />;
 
   return (
     <div>
@@ -157,10 +157,10 @@ const AddClass = () => {
         </div>
         <div className="text-center col-span-2">
           <button
-            disabled={loading}
+            disabled={isPending}
             className="py-2 px-8 bg-[#49c3af] text-white w-1/2 rounded-sm font-semibold"
           >
-            {loading ? "Wait..." : "Add Class"}
+            {isPending ? "Wait..." : "Add Class"}
           </button>
         </div>
       </form>

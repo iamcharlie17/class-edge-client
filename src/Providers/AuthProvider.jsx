@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
+import { axiosCommon } from "../Hooks/useAxiosCommon";
 
 
 const googleProvider = new GoogleAuthProvider()
@@ -40,17 +41,17 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            // if(currentUser) {
-            //     axiosCommon.post('/jwt', {email: user?.email})
-            //     .then(res => {
-            //         localStorage.setItem('accessToken', res.data.token)
-            //     })
+            if(currentUser) {
+                axiosCommon.post('/jwt', {email: user?.email})
+                .then(res => {
+                    localStorage.setItem('accessToken', res.data.token)
+                })
                 
-            // }
-            // else{
-            //     //remove token from localStorage when logout
-            //     localStorage.removeItem('accessToken');
-            // }
+            }
+            else{
+                //remove token from localStorage when logout
+                localStorage.removeItem('accessToken');
+            }
           setUser(currentUser);
           setLoading(false);
           

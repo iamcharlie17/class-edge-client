@@ -2,14 +2,15 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../../../Hooks/useAuth";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
-import { axiosCommon } from "../../../../Hooks/useAxiosCommon";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import Loading from "../../../../components/Loading/Loading";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const MyClass = () => {
   const { user, loading } = useAuth();
+  const axiosSecure = useAxiosSecure()
 
   const {
     data: classes = [],
@@ -18,7 +19,7 @@ const MyClass = () => {
   } = useQuery({
     queryKey: ["my-class"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/classes/${user?.email}`);
+      const { data } = await axiosSecure.get(`/classes/${user?.email}`);
       return data;
     },
   });
@@ -35,7 +36,7 @@ const MyClass = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axiosCommon.delete(`/delete-class/${id}`);
+          const { data } = await axiosSecure.delete(`/delete-class/${id}`);
           if (data.deletedCount > 0) {
             toast.success("Class deleted successfully");
             refetch();

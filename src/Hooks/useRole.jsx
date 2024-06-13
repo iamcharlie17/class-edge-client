@@ -13,7 +13,7 @@ const useRole = () => {
     queryKey: ["role"],
     // enabled: !!localStorage.getItem("accessToken"),
     queryFn: async () => {
-      const { data } = await axiosSecure("/users");
+      const { data } = await axiosSecure.get("/users");
       return data;
     },
   });

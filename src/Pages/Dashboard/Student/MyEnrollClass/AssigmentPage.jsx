@@ -1,32 +1,32 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { axiosCommon } from "../../../../Hooks/useAxiosCommon";
-import Loading from "../../../../components/Loading/Loading";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import useAuth from "../../../../Hooks/useAuth";
 import EvalutionModal from "../../../../components/Modal/EvalutionModal";
 import { useState } from "react";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AssigmentPage = () => {
   const id = useParams();
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false)
   const [classId, setClassId] = useState('')
+  const axiosSecure = useAxiosSecure()
 
   const { data: assignments = [], isLoading } = useQuery({
     queryKey: ["assignments"],
     queryFn: async () => {
-      const res = await axiosCommon(`/assignments/${id.id}`);
+      const res = await axiosSecure(`/assignments/${id.id}`);
       return res.data;
     },
   });
 
   //   console.log(assignments);
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: async (data) => {
-      const res = await axiosCommon.put(`/assignment-submission`, data);
+      const res = await axiosSecure.put(`/assignment-submission`, data);
       return res.data;
     },
     onSuccess: () => {
@@ -58,8 +58,6 @@ const AssigmentPage = () => {
     setClassId(id)
     setIsOpen(true)
   }
-
-  if (isLoading) return <Loading />;
   return (
     <div className="my-8">
       <div className="text-end">
@@ -73,7 +71,7 @@ const AssigmentPage = () => {
 
 
       {/* evalution modal */}
-      <EvalutionModal isOpen={isOpen} setIsOpen={setIsOpen} id={classId} />
+      <EvalutionModal isOpen={isOpen} setIsOpen={setIsOpen} isLoading={isLoading} id={classId} />
 
 
       <SectionTitle
@@ -109,7 +107,7 @@ const AssigmentPage = () => {
                     onClick={() => handleSubmit(assignment._id)}
                     className="px-4 py-2 bg-[#4BC1AD] text-white rounded-sm"
                   >
-                    Submit
+                    {isPending?'Wait...': 'Submit'}
                   </button>
                 </th>
               </tr>

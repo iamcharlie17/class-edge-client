@@ -5,6 +5,7 @@ import Loading from "../../../../components/Loading/Loading";
 import UpdateStatusModal from "../../../../components/Modal/UpdateStatusModal";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 const AllClasses = () => {
   const axiosSecure = useAxiosSecure();
@@ -32,7 +33,9 @@ const AllClasses = () => {
   if (isLoading) return <Loading />;
   return (
     <div>
-        <Helmet><title>ClassEdge | All Classes</title></Helmet>
+      <Helmet>
+        <title>ClassEdge | All Classes</title>
+      </Helmet>
       <SectionTitle
         heading={"All classes"}
         subHeading={"----------------------"}
@@ -94,9 +97,18 @@ const AllClasses = () => {
                   </button>
                 </th>
                 <th>
-                  <button disabled={c.status !== 'approved'} className={`px-2 py-1 ${c.status !== 'approved'? 'bg-[#374d49]':'bg-[#4BC1AD]'} text-white rounded-sm`}>
-                    <small>See Progress</small>
-                  </button>
+                  <Link to={`/dashboard/class/${c._id}`}>
+                    <button
+                      disabled={c.status !== "approved"}
+                      className={`px-2 py-1 ${
+                        c.status !== "approved"
+                          ? "bg-[#374d49]"
+                          : "bg-[#4BC1AD]"
+                      } text-white rounded-sm`}
+                    >
+                      <small>See Progress</small>
+                    </button>
+                  </Link>
                 </th>
               </tr>
             ))}

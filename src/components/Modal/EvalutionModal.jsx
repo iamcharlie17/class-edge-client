@@ -4,21 +4,22 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
-import { axiosCommon } from "../../Hooks/useAxiosCommon";
 import useAuth from "../../Hooks/useAuth";
-import Loading from "../Loading/Loading";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { TbLoaderQuarter } from "react-icons/tb";
 
-const EvalutionModal = ({ isOpen, setIsOpen, id }) => {
+const EvalutionModal = ({ isOpen, setIsOpen, id, isLoading }) => {
   const [value, setValue] = React.useState(2);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
-  const { data: singleClass = {}, isLoading } = useQuery({
+  const { data: singleClass = {}, isPending } = useQuery({
     queryKey: ["singleClass"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/class/${id}`);
+      const { data } = await axiosSecure.get(`/class/${id}`);
       return data;
     },
   });
@@ -34,7 +35,7 @@ const EvalutionModal = ({ isOpen, setIsOpen, id }) => {
       ratings: value,
     };
     try {
-      const {data} = await axiosCommon.post("/feedback", feedback);
+      const { data } = await axiosSecure.post("/feedback", feedback);
       if (data.insertedId) {
         toast.success("Thanks for you feedback");
         e.target.reset();
@@ -45,7 +46,7 @@ const EvalutionModal = ({ isOpen, setIsOpen, id }) => {
     }
   };
 
-  if (isLoading) return <Loading />;
+  // if (isLoading) return <Loading />;
   return (
     <Dialog
       open={isOpen}
@@ -55,8 +56,16 @@ const EvalutionModal = ({ isOpen, setIsOpen, id }) => {
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
         <DialogPanel className="max-w-lg space-y-4 border bg-[#49C3AF] rounded-sm text-white p-12">
           <DialogTitle className="font-semibold text-xl text-center">
-            <span className="text-3xl">Evalution</span> <br />
-            for - {singleClass?.name}
+            <span className="text-3xl">Evalution for -</span> <br />
+            <span className={`${isPending ? "animate-spin" : ""}`}>
+              {isLoading || isPending ? (
+                <div className="flex justify-center">
+                  <TbLoaderQuarter />
+                </div>
+              ) : (
+                `${singleClass?.name}`
+              )}
+            </span>
           </DialogTitle>
 
           <form onSubmit={handleSubmit} className="space-y-2">

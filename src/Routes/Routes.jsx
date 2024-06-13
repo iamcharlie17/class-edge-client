@@ -21,6 +21,8 @@ import AllTeachers from "../Pages/AllTeachers/AllTeachers";
 import MyClassDetails from "../Pages/Dashboard/Teacher/MyClassDetails/MyClassDetails";
 import UpdateMyClass from "../Pages/Dashboard/Teacher/UpdateMyClass/UpdateMyClass";
 import AssigmentPage from "../Pages/Dashboard/Student/MyEnrollClass/AssigmentPage";
+import FeedBacksOfClass from "../Pages/Dashboard/Admin/AllClasses/FeedBacksOfClass";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -37,7 +39,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/class/:id",
-        element: <ClassDetails />,
+        element: (
+          <PrivateRoute>
+            <ClassDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/teach-on-classedge",
@@ -59,58 +65,120 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <AdminRoute>
+        <DashboardLayout />
+      </AdminRoute>
+    ),
     children: [
       //student--
       {
         path: "/dashboard/student",
-        element: <StudentProfile />,
+        element: (
+          <AdminRoute>
+            <StudentProfile />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/my-enroll-class",
-        element: <MyEnrollClass />,
+        element: (
+          <AdminRoute>
+            <MyEnrollClass />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/my-enroll-class/:id',
-        element: <PrivateRoute><AssigmentPage/></PrivateRoute>
+        path: "/dashboard/my-enroll-class/:id",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AssigmentPage />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       //admin
       {
         path: "/dashboard/admin",
-        element: <AdminProfile />,
+        element: (
+          <AdminRoute>
+            <AdminProfile />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/teacher-requests",
-        element: <TeacherRequest />,
+        element: (
+          <AdminRoute>
+            <TeacherRequest />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-users",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-classes",
-        element: <AllClasses />,
+        element: (
+          <AdminRoute>
+            <AllClasses />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/class/:id",
+        element: (
+          <AdminRoute>
+            <FeedBacksOfClass />
+          </AdminRoute>
+        ),
       },
       //teacher
       {
         path: "/dashboard/teacher",
-        element: <TeacherProfile />,
+        element: (
+          <AdminRoute>
+            <TeacherProfile />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/add-class",
-        element: <AddClass />,
+        element: (
+          <AdminRoute>
+            <AddClass />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/update-class/:id",
-        element: <UpdateMyClass />,
+        element: (
+          <AdminRoute>
+            <UpdateMyClass />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/my-classes",
-        element: <MyClass />,
+        element: (
+          <AdminRoute>
+            <MyClass />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/my-class-details/:id",
-        element: <MyClassDetails />,
+        element: (
+          <AdminRoute>
+            <MyClassDetails />
+          </AdminRoute>
+        ),
       },
     ],
   },

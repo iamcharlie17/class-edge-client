@@ -15,7 +15,7 @@ const Teachers = () => {
   });
 
   //get 6 teachers only
-  const teachers = data.slice(0, 6) || [];
+  const teachers = data.slice(data.length-6,data.length) || [];
   // console.log(teachers);
 
   if (isLoading) return <Loading />;
