@@ -5,6 +5,8 @@ import Categories from "../Categroy/Categories";
 import Sponsor from "../Sponsor/Sponsor";
 import Teachers from "../TeacherPanel/Teachers";
 import Stats from "../Stats/Stats";
+import TeacherRequest from "../TeacherRequest/TeacherRequest";
+import FeedBacks from "../FeedBacks/FeedBacks";
 
 const Home = () => {
   return (
@@ -12,10 +14,12 @@ const Home = () => {
       <Helmet><title>ClassEdge | Home</title></Helmet>
       <Banner />
       <div className="mx-2 md:mx-16 lg:mx-24">
+        <FeedBacks/>
         <Stats/>
         <Sponsor/>
         <Categories />
         <Teachers/>
+        <TeacherRequest/>
       </div>
     </div>
   );

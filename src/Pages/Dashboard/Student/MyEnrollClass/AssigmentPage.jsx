@@ -5,10 +5,14 @@ import Loading from "../../../../components/Loading/Loading";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import useAuth from "../../../../Hooks/useAuth";
+import EvalutionModal from "../../../../components/Modal/EvalutionModal";
+import { useState } from "react";
 
 const AssigmentPage = () => {
   const id = useParams();
   const { user } = useAuth();
+  const [isOpen, setIsOpen] = useState(false)
+  const [classId, setClassId] = useState('')
 
   const { data: assignments = [], isLoading } = useQuery({
     queryKey: ["assignments"],
@@ -50,14 +54,28 @@ const AssigmentPage = () => {
     }
   };
 
+  const handleModal = async id =>{
+    setClassId(id)
+    setIsOpen(true)
+  }
+
   if (isLoading) return <Loading />;
   return (
     <div className="my-8">
       <div className="text-end">
-        <button className="px-4 py-2 mb-4 uppercase bg-[#49C3AF] text-white font-semibold rounded-sm">
+        <button
+          onClick={() => handleModal(id.id)}
+          className="px-4 py-2 mb-4 uppercase bg-[#49C3AF] text-white font-semibold rounded-sm"
+        >
           Evalution
         </button>
       </div>
+
+
+      {/* evalution modal */}
+      <EvalutionModal isOpen={isOpen} setIsOpen={setIsOpen} id={classId} />
+
+
       <SectionTitle
         heading={"Assignments"}
         subHeading={"----------------------------"}
