@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading/Loading";
 import useAuth from "../../../../Hooks/useAuth";
 import { useState } from "react";
@@ -10,13 +9,13 @@ import UpdateRoleModal from "../../../../components/Modal/UpdateRoleModal";
 import { Pagination, PaginationItem, Stack, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { axiosCommon } from "../../../../Hooks/useAxiosCommon";
 
 const AllUsers = () => {
   const { user } = useAuth();
 
   let [isOpen, setIsOpen] = useState(false);
   const [updateUser, setUpdateUser] = useState(null);
-  const axiosSecure = useAxiosSecure();
 
   // pagination---------------------------
   const [page, setPage] = useState(1);
@@ -25,7 +24,7 @@ const AllUsers = () => {
   const { data: counts = [] } = useQuery({
     queryKey: ["count"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/all-users-count`);
+      const { data } = await axiosCommon.get(`/all-users-count`);
       return data;
     },
   });
@@ -46,7 +45,7 @@ const AllUsers = () => {
   } = useQuery({
     queryKey: ["all-users", page],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(
+      const { data } = await axiosCommon.get(
         `/all-users?page=${page}&size=${itemPerPage}`
       );
       return data;

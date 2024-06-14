@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading/Loading";
 import UpdateStatusModal from "../../../../components/Modal/UpdateStatusModal";
 import { useState } from "react";
@@ -10,11 +9,12 @@ import { Link } from "react-router-dom";
 import { Pagination, PaginationItem, Stack, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AllClasses = () => {
-  const axiosSecure = useAxiosSecure();
   let [isOpen, setIsOpen] = useState(false);
   const [updateClas, setUpdateClas] = useState("");
+  const axiosSecure = useAxiosSecure()
 
    // pagination---------------------------
    const [page, setPage] = useState(1);

@@ -37,8 +37,8 @@ const Classes = () => {
     },
   });
 
-  console.log(count);
-  console.log(page, numberOfPages);
+  // console.log(count);
+  // console.log(page, numberOfPages);
 
   return (
     <div className="min-h-[calc(100vh-240px)]">

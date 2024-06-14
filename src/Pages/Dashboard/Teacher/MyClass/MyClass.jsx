@@ -27,7 +27,7 @@ const MyClass = () => {
   });
 
   const count = data?.length;
-  console.log(count)
+  // console.log(count)
   const numberOfPages = Math.ceil(count / itemPerPage);
 
   const handleChange = (event, value) => {
