@@ -7,19 +7,42 @@ import Swal from "sweetalert2";
 import Loading from "../../../../components/Loading/Loading";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import PaginationComponent from "../../../../components/PaginationComponent/PaginationComponent";
+import { useState } from "react";
 
 const MyClass = () => {
   const { user, loading } = useAuth();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
+
+  //pagination---
+  const [page, setPage] = useState(1);
+  const itemPerPage = 10;
+
+  const { data } = useQuery({
+    queryKey: ["count"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`classes/${user?.email}`);
+      return data;
+    },
+  });
+
+  const count = data?.length;
+  console.log(count)
+  const numberOfPages = Math.ceil(count / itemPerPage);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+  //pagination----
 
   const {
     data: classes = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["my-class"],
+    queryKey: ["my-class", page],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/classes/${user?.email}`);
+      const { data } = await axiosSecure.get(`/classes/${user?.email}?page=${page}&size=${itemPerPage}`);
       return data;
     },
   });
@@ -122,6 +145,11 @@ const MyClass = () => {
           </div>
         ))}
       </div>
+      <PaginationComponent
+        page={page}
+        numberOfPages={numberOfPages}
+        handleChange={handleChange}
+      />
     </div>
   );
 };

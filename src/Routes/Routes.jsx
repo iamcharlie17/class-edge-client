@@ -23,6 +23,7 @@ import UpdateMyClass from "../Pages/Dashboard/Teacher/UpdateMyClass/UpdateMyClas
 import AssigmentPage from "../Pages/Dashboard/Student/MyEnrollClass/AssigmentPage";
 import FeedBacksOfClass from "../Pages/Dashboard/Admin/AllClasses/FeedBacksOfClass";
 import AdminRoute from "./AdminRoute";
+import NotFound from "../Pages/NotFound/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -190,4 +191,8 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: '*',
+    element: <NotFound/>
+  }
 ]);

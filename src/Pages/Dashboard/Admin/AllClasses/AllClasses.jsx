@@ -7,19 +7,43 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
+import { Pagination, PaginationItem, Stack, Typography } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
 const AllClasses = () => {
   const axiosSecure = useAxiosSecure();
   let [isOpen, setIsOpen] = useState(false);
   const [updateClas, setUpdateClas] = useState("");
+
+   // pagination---------------------------
+   const [page, setPage] = useState(1);
+   const itemPerPage = 10;
+ 
+   const { data: counts = [] } = useQuery({
+     queryKey: ["count"],
+     queryFn: async () => {
+       const { data } = await axiosSecure.get(`/all-classes-count`);
+       return data;
+     },
+   });
+ 
+   const count = counts?.count;
+   const numberOfPages = Math.ceil(count / itemPerPage);
+ 
+   const handleChange = (event, value) => {
+     setPage(value);
+   };
+   // pagination--------------------------
 
   const {
     data: classes = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["all-classes"],
+    queryKey: ["all-classes", page],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/all-classes");
+      const { data } = await axiosSecure.get(`/all-classes?page=${page}&size=${itemPerPage}`);
       return data;
     },
   });
@@ -40,11 +64,6 @@ const AllClasses = () => {
         heading={"All classes"}
         subHeading={"----------------------"}
       />
-      <div>
-        <h1 className="lg:text-3xl md:text-xl p-8 font-semibold uppercase">
-          total users: {classes?.length}
-        </h1>
-      </div>
 
       {/* modal is here */}
       <UpdateStatusModal
@@ -114,6 +133,23 @@ const AllClasses = () => {
             ))}
           </tbody>
         </table>
+         {/* paginaation here */}
+         <Stack spacing={2}>
+          <Typography>Page: {page}</Typography>
+          <Pagination
+            count={numberOfPages}
+            page={page}
+            onChange={handleChange}
+            renderItem={(item) => (
+              <PaginationItem
+                slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                {...item}
+              />
+            )}
+          />
+        </Stack>
+
+        {/* pagination */}
       </div>
     </div>
   );

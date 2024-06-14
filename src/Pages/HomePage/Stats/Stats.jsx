@@ -9,7 +9,8 @@ import { MdOutlinePayment } from "react-icons/md";
 const Stats = () => {
   const [clas, setClasses] = useState([]);
   useEffect(() => {
-    axiosCommon.get("/all-classes").then((res) => setClasses(res.data));
+    axiosCommon.get("/all-classes-stats")
+    .then((res) => setClasses(res.data));
   }, []);
 
   const { data: users = [] } = useQuery({
@@ -19,6 +20,8 @@ const Stats = () => {
       return res.data;
     },
   });
+
+  // console.log(clas)
 
   const classes = clas.filter((c) => c.status === "approved");
 

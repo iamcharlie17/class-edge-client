@@ -5,18 +5,41 @@ import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { FaCheck } from "react-icons/fa6";
 import Loading from "../../../../components/Loading/Loading";
 import toast from "react-hot-toast";
+import PaginationComponent from "../../../../components/PaginationComponent/PaginationComponent";
+import { useState } from "react";
 
 const TeacherRequest = () => {
   const axiosSecure = useAxiosSecure();
+
+  //pagination----
+  const [page, setPage] = useState(1);
+  const itemPerPage = 10;
+
+  const { data } = useQuery({
+    queryKey: ["count"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/teachers-count`);
+      return data;
+    },
+  });
+
+  const count = data?.count;
+  const numberOfPages = Math.ceil(count / itemPerPage);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  //pagination-------
 
   const {
     data: teachers = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["requested-teachers"],
+    queryKey: ["requested-teachers", page],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/teachers");
+      const { data } = await axiosSecure.get(`/teachers?page=${page}&size=${itemPerPage}`);
       return data;
     },
   });
@@ -145,6 +168,7 @@ const TeacherRequest = () => {
             ))}
           </tbody>
         </table>
+        <PaginationComponent page={page} numberOfPages={numberOfPages} handleChange={handleChange}/>
       </div>
     </div>
   );

@@ -7,22 +7,48 @@ import useAuth from "../../../../Hooks/useAuth";
 import { useState } from "react";
 import UpdateRoleModal from "../../../../components/Modal/UpdateRoleModal";
 
+import { Pagination, PaginationItem, Stack, Typography } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
 const AllUsers = () => {
   const { user } = useAuth();
 
   let [isOpen, setIsOpen] = useState(false);
   const [updateUser, setUpdateUser] = useState(null);
-
   const axiosSecure = useAxiosSecure();
+
+  // pagination---------------------------
+  const [page, setPage] = useState(1);
+  const itemPerPage = 10;
+
+  const { data: counts = [] } = useQuery({
+    queryKey: ["count"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/all-users-count`);
+      return data;
+    },
+  });
+
+  const count = counts?.count;
+  // console.log(count)
+  const numberOfPages = Math.ceil(count / itemPerPage);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+  // pagination--------------------------
 
   const {
     data = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["all-users"],
+    queryKey: ["all-users", page],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/all-users");
+      const { data } = await axiosSecure.get(
+        `/all-users?page=${page}&size=${itemPerPage}`
+      );
       return data;
     },
   });
@@ -34,6 +60,8 @@ const AllUsers = () => {
     setUpdateUser(user);
   };
 
+  refetch()
+
   if (isLoading) return <Loading />;
   return (
     <div>
@@ -41,11 +69,6 @@ const AllUsers = () => {
         <title>ClassEdge | All Users</title>
       </Helmet>
       <SectionTitle heading={"All Users"} subHeading={"------------------"} />
-      <div>
-        <h1 className="lg:text-3xl md:text-xl p-8 font-semibold uppercase">
-          total users: {usersWithoutAdmin?.length}
-        </h1>
-      </div>
 
       {/* modal here */}
       <UpdateRoleModal
@@ -91,6 +114,23 @@ const AllUsers = () => {
             ))}
           </tbody>
         </table>
+        {/* paginaation here */}
+        <Stack spacing={2}>
+          <Typography>Page: {page}</Typography>
+          <Pagination
+            count={numberOfPages}
+            page={page}
+            onChange={handleChange}
+            renderItem={(item) => (
+              <PaginationItem
+                slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                {...item}
+              />
+            )}
+          />
+        </Stack>
+
+        {/* pagination */}
       </div>
     </div>
   );
