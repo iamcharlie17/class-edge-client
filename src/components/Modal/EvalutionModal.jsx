@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { TbLoaderQuarter } from "react-icons/tb";
+import Loading from "../Loading/Loading";
 
 const EvalutionModal = ({ isOpen, setIsOpen, id, isLoading }) => {
   const [value, setValue] = React.useState(2);
@@ -46,7 +47,7 @@ const EvalutionModal = ({ isOpen, setIsOpen, id, isLoading }) => {
     }
   };
 
-  // if (isLoading) return <Loading />;
+  if (isLoading) return <Loading />;
   return (
     <Dialog
       open={isOpen}
@@ -57,9 +58,9 @@ const EvalutionModal = ({ isOpen, setIsOpen, id, isLoading }) => {
         <DialogPanel className="max-w-lg space-y-4 border bg-[#49C3AF] rounded-sm text-white p-12">
           <DialogTitle className="font-semibold text-xl text-center">
             <span className="text-3xl">Evalution for -</span> <br />
-            <span className={`${isPending ? "animate-spin" : ""}`}>
-              {isLoading || isPending ? (
-                <div className="flex justify-center">
+            <span>
+              {isPending ? (
+                <div className="flex animate-spin justify-center">
                   <TbLoaderQuarter />
                 </div>
               ) : (

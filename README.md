@@ -1,9 +1,5 @@
 # ClassEdge
 
-## Admin Credentials
-- **Email**: admin@gmail.com
-- **Password**: adminadmin
-
 ## Live Site
 - [ClassEdge Live Site](https://edumanage.example.com)
 
@@ -19,6 +15,5 @@
 9. Feedback and rating system.
 10. Search functionality and pagination.
 
-## Links
-- [Client-side Repository](https://github.com/programming-hero-web-course1/b9a12-client-side-iamcharlie17)
-- [Server-side Repository](https://github.com/programming-hero-web-course1/b9a12-server-side-iamcharlie17)
+## Portfolio
+- [Portfolio Live](https://charlie-portfolio-17.netlify.app)
