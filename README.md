@@ -15,5 +15,16 @@
 9. Feedback and rating system.
 10. Search functionality and pagination.
 
+
+<div>
+  <h2>Technologies</h2>
+  <div >
+    <img src="https://skillicons.dev/icons?i=html,css,javascript,react,tailwind" />
+    <img src="https://skillicons.dev/icons?i=nodejs,express,firebase,mongodb" /><br>
+ </div>
+  <h1>Tools</h1>
+  <img src="https://skillicons.dev/icons?i=vscode,github,git" />
+</div>
+
 ## Portfolio
 - [Portfolio Live](https://charlie-portfolio-17.netlify.app)
