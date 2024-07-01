@@ -34,7 +34,8 @@ const Sidebar = () => {
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
           className="drawer-overlay"
-        ></label>
+        >
+        </label>
 
         <div className="">
           <h1 className="text-4xl text-center border-b py-8 font-bold">

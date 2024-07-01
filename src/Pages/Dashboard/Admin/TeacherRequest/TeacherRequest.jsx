@@ -100,7 +100,7 @@ const TeacherRequest = () => {
         subHeading={"------------------------------------------"}
       />
       <div className="overflow-x-auto bg-white p-8 shadow-lg">
-        <table className="table">
+        <table className="table overflow-x-auto">
           {/* head */}
           <thead className="bg-[#4AC2AE] text-white uppercase shadow-lg">
             <tr>

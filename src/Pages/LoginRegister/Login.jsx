@@ -73,8 +73,8 @@ const Login = () => {
       </Helmet>
       <div className="min-h-screen bg-[#49c3af]">
         <div className="md:p-12 lg:p-24 ">
-          <div className="md:px-8 md:py-4 shadow-xl  flex flex-col lg:flex-row gap-2 md:gap-8 lg:gap-24 items-center">
-            <div className="flex-1">
+          <div className="md:px-8 md:py-4 shadow-xl mx-4 p-8 flex flex-col lg:flex-row gap-2  lg:gap-24 items-center">
+            <div className="md:flex-1 md:block hidden">
               <img src={authImg} alt="" />
             </div>
             <div className="flex-1 w-full ">
